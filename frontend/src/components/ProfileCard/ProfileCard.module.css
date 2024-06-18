@@ -1,0 +1,41 @@
+.card {
+    display: flex;
+    margin-top: 100px;
+    background-color: rgba(0, 0, 0, 0.7);
+    height: 300px;
+    color: white;
+    padding: 0 0 0 10%;
+    border-radius: 30px;
+    align-items: center;
+}
+
+.icon {
+    padding: 1px;
+    border-radius: 100px;
+    background-color: azure;
+    width: 150px;
+    height: 150px;
+    align-items: start;
+}
+
+.info {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    font-size: 20px;
+    text-align: start;
+    padding-left: 20px;
+    width: fit-content;
+}
+
+.username {
+    font-size: 32px;
+    font-weight: 600;
+}
+
+.value {
+    font-family: 'Rubik Mono One', monospace;
+    font-size: 22px;
+    color: #995AFF;
+}
+
