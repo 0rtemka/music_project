@@ -1,0 +1,14 @@
+.cardsList {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.listTitle {
+    font-family: 'Rubik Mono One', monospace;
+    font-size: 28px;
+    color: #995AFF;
+    text-align: start;
+    margin-top: 30px;
+}

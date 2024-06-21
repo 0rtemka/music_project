@@ -6,6 +6,7 @@ import ErrorPage from './pages/ErrorPage'
 import Layout from './components/Layout'
 import AwardsPage from './pages/AwardsPage/AwardsPage'
 import ArtistPage from './pages/ArtistPage/ArtistPage'
+import SongPage from './pages/SongPage/SongPage'
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
           <Route path='awards' element={<AwardsPage />} />
           <Route path='me' element={<ProfilePage />} />
           <Route path='artists/:slug' element={<ArtistPage />} />
+          <Route path='songs/:id' element={<SongPage />} />
           <Route path='*' element={<ErrorPage />} />
         </Route>
       </Routes>

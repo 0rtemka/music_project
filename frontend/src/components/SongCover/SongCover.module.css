@@ -1,0 +1,62 @@
+.songCover {
+    display: flex;
+    position: relative;
+}
+
+.songCover:hover {
+    .rating {
+        visibility: visible;
+    }
+}
+
+.cardImg {
+    position: relative;
+    width: 200px;
+    height: 200px;
+    border-radius: 10px;
+}
+
+.rating {
+    font-family: 'Rubik Mono One', monospace;
+    visibility: hidden;
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    z-index: 2;
+    color: #995AFF;
+    width: 200px;
+    height: 200px;
+    border-radius: 10px;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.small {
+    width: 120px;
+    height: 120px;
+
+    .rating {
+        display: none;
+    }
+}
+
+.text {
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+}
+
+.ratingText {
+    font-size: 16px;
+}
+
+.ratingTextSmall {
+    font-size: 12px;
+}
+
+.ratingValue {
+    font-size: 86px;
+}
+
+.ratingValueSmall {
+    font-size: 56px;
+}

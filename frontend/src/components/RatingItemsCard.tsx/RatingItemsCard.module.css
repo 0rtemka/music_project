@@ -1,0 +1,27 @@
+.items {
+    background-color: #3C3C3C; 
+    padding: 5px; 
+    font-family: 'Rubik Mono One', monospace;
+    font-size: 30px;
+    border-radius: 10px;
+}
+
+.item {
+    padding: 5px;
+}
+
+.relevance {
+    color: #BC97F8; 
+}
+.structure {
+    color: #A169FC; 
+}
+.realization {
+    color: #9452FF; 
+}
+.lyrics {
+    color: #7F30FF; 
+}
+.beat {
+    color: #690DFF; 
+}

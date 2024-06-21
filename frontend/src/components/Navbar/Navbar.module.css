@@ -1,7 +1,32 @@
 .navbar {
   position: fixed;
+  z-index: 10;
   display: flex;
-  gap: 100px
+  gap: 100px;
+
+  a {
+    text-decoration: none;
+    color: white;
+    width: 190px;
+    line-height: 50px;
+  }
+  
+  a:hover {
+    color: #AB91D5;
+  }
+
+  .active {
+    background-color: #AB91D5;
+    width: 190px;
+    margin-top: 5px;
+    height: 40px;
+    line-height: 40px;
+    border-radius: 30px;
+  }
+  
+  .active:hover {
+      color: white;
+  }
 }
 
 .mainMenu {
@@ -15,30 +40,6 @@
   background-color: #4B4B4B;
   font-size: 24px;
   padding: 0 5px 0 5px;
-}
-
-a {
-  text-decoration: none;
-  color: white;
-  width: 190px;
-  line-height: 50px;
-}
-
-a:hover {
-  color: #AB91D5;
-}
-
-.active {
-  background-color: #AB91D5;
-  width: 190px;
-  margin-top: 5px;
-  height: 40px;
-  line-height: 40px;
-  border-radius: 30px;
-}
-
-.active:hover {
-    color: white;
 }
 
 .userIcon {

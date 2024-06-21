@@ -1,0 +1,37 @@
+.reviewHeader {
+    display: flex;
+    border: 1px solid #995AFF;
+    border-radius: 10px;
+    padding: 20px;
+    justify-content: space-between;
+}
+
+.reviewContent {
+    display: flex;
+    gap: 20px;
+
+}
+
+.userIcon {
+    background-color: azure;
+    border-radius: 50px;
+    width: 60px;
+    height: 60px;
+    padding: 1px;
+}
+
+.reviewInfo {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    text-align: start;
+}
+
+.username {
+    font-size: 22px;
+    font-weight: 600;
+}
+
+.reviewDate {
+    font-weight: 100;
+}

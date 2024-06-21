@@ -2,7 +2,7 @@
     position: relative;
     z-index: 1;
     width: 230px;
-    height: 330px;
+    height: 300px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -10,55 +10,13 @@
     color: white;
     border-radius: 10px;
     font-size: 17px;
-}
-
-.rating {
-    font-family: 'Rubik Mono One', monospace;
-    visibility: hidden;
-    display: flex;
-    flex-direction: column;
-    position: absolute;
-    z-index: 2;
-    color: #995AFF;
-    margin: 20px;
-    width: 200px;
-    height: 200px;
-    border-radius: 10px;
-    background-color: rgba(0, 0, 0, 0.4);
-}
-
-.card:hover {
-    .rating {
-        visibility:visible;
-    }
-}
-
-.text {
-    display: flex;
-    flex-direction: column;
-    margin-top: 20px;
-}
-
-.ratingText {
-    font-size: 16px;
-}
-
-.ratingValue {
-    font-size: 86px;
-}
-
-.cardImg {
-    padding: 20px;
-    width: 200px;
-    height: 200px;
-    border-radius: 30px;
+    padding: 15px;
 }
 
 .title {
     padding: 0 10px 0 10px;
     font-weight: 600;
-    margin-top: -15px;
-
+    margin-top: 15px;
 }
 
 .title:hover {

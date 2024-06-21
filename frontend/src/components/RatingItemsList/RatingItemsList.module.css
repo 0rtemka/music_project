@@ -1,0 +1,38 @@
+.itemsList {
+    display: flex;
+    flex-direction: column;
+    text-align: start;
+}
+
+.item {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.itemTitle {
+    font-size: 20px;
+    color: white;
+}
+
+.itemValue {
+    font-family: 'Rubik Mono One', monospace;
+    font-size: 28px;
+}
+
+.relevance {
+    color: #BC97F8; 
+}
+.structure {
+    color: #A169FC; 
+}
+.realization {
+    color: #9452FF; 
+}
+.lyrics {
+    color: #7F30FF; 
+}
+.beat {
+    color: #690DFF; 
+}
+

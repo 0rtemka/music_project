@@ -1,0 +1,45 @@
+.songCard {
+    margin-top: 100px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.7);
+    border-radius: 10px;
+    padding: 30px;
+}
+
+.songCover {
+    width: 200px;
+    height: 200px;
+    border-radius: 10px;
+}
+
+.songInfo {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 50%;
+}
+
+.songTitle {
+    display: flex;
+    gap: 20px;
+    color: white;
+    font-size: 22px;
+    justify-content: center;
+    padding: 20px 10px 20px 10px;
+    background-color: rgba(60, 60, 60, 0.6);
+    border-radius: 20px;
+}
+
+.ratingInfo {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.artistLink:hover {
+    text-decoration: underline;
+    color: #995AFF;
+}
+

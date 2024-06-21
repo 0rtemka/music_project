@@ -1,0 +1,21 @@
+.rating {
+    font-family: 'Rubik Mono One', monospace;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    color: #995AFF;
+    align-items: center;
+    gap: 10px;
+}
+
+.ratingValue {
+    font-size: 40px;
+    border: #995AFF solid;
+    border-radius: 10px;
+    width: fit-content;
+    padding: 5px 20px 5px 20px;
+}
+
+.ratingTitle {
+    font-size: 14px;
+}
