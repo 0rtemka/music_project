@@ -1,3 +1,4 @@
+import styles from './ProfilePage.module.css'
 import CardsList from "../../components/CardsList/CardsList";
 import ProfileCard, { UserInfo } from "../../components/ProfileCard/ProfileCard";
 import ReviewCard, { Review } from "../../components/ReviewCard/ReviewCard";
@@ -10,13 +11,13 @@ const reviews: Review[] = [
 
 export default function ProfilePage() {
     return (
-        <>
+        <div className={styles.profilePage}>
             <ProfileCard userInfo={userInfo} />
             <CardsList title="Мои рецензии">
                 {reviews.map(review =>
-                    <ReviewCard review={review} />
+                    <ReviewCard review={review} showCover={true} />
                 )}
             </CardsList>
-        </>
+        </div>
     )
 }

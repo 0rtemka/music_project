@@ -18,23 +18,29 @@ export interface Review {
 
 interface ReviewCardProps {
     review: Review;
+    showCover?: boolean
 }
 
-export default function ReviewCard({ review }: ReviewCardProps) {
+export default function ReviewCard({ review, showCover }: ReviewCardProps) {
     return (
         <div className={styles.reviewCard}>
             <ReviewHeader review={{ img: '/user.png', username: 'username', reviewDate: new Date(Date.now()).toLocaleDateString() }} />
             <div className={styles.reviewContent}>
-                <div className={styles.reviewText}>
+                <div className={`${styles.reviewText} ${showCover ? styles.withCover : null}`}>
                     <span className={styles.title}>{review.title}</span>
                     <span className={styles.description}>{review.description}</span>
                 </div>
-                <div className={styles.song}>
+                {showCover ?
+                    <Link to={`/songs/1`} className={styles.song}>
                     <SongCover small={true} cover={{ img: review.cover, rating: review.rating, title: 'Рейтинг' }} />
-                    <Link to={`/`} className={styles.songTitle}>
+                    <span className={styles.songTitle}>
                         {review.song}
-                    </Link>
-                </div>
+                    </span>
+                </Link>
+                :
+                    null
+                }
+                
             </div>
         </div>
     )

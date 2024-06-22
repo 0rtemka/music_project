@@ -1,0 +1,66 @@
+.ratingForm {
+    display: grid;
+    grid-template-columns: 100%;
+    grid-template-rows: 100% 100%;
+    flex-direction: column;
+    gap: 30px;
+    background-color: rgba(0, 0, 0, 0.7);
+    border-radius: 20px;
+    padding: 30px;
+}
+
+.formTitle {
+    font-family: 'Rubik Mono One', monospace;
+    font-size: 28px;
+    text-align: start;
+    color: #995AFF;
+}
+
+.inputsAndRating {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    justify-items: center;
+    align-items: center;
+    row-gap: 20px;
+}
+
+.titleInput {
+    background-color: rgba(60, 60, 60, 0.6);
+    border: none;
+    border-radius: 10px;
+    font-size: 16px;
+    color: white;
+    padding: 20px;
+}
+
+.descInput {
+    font-family: 'Montserrat', sans-serif;
+    height: 200px;
+    background-color: rgba(60, 60, 60, 0.6);
+    border: none;
+    border-radius: 10px;
+    font-size: 16px;
+    padding: 20px;
+    color: white;
+}
+
+.reviewBody {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.ratingButtonArea {
+    display: flex;
+    justify-content: end;
+}
+
+.ratingButton {
+    background-color: #995AFF;
+    padding: 20px;
+    width: fit-content;
+    font-size: 16px;
+    color: white;
+    border: none;
+    border-radius: 20px;
+}

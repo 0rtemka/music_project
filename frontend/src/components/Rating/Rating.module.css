@@ -9,9 +9,9 @@
 }
 
 .ratingValue {
-    font-size: 40px;
+    font-size: 50px;
     border: #995AFF solid;
-    border-radius: 10px;
+    border-radius: 30px;
     width: fit-content;
     padding: 5px 20px 5px 20px;
 }

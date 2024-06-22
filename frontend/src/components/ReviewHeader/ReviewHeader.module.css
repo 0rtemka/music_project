@@ -1,29 +1,32 @@
 .reviewHeader {
     display: flex;
-    border: 1px solid #995AFF;
+    background-color: rgba(60, 60, 60, 0.6);
     border-radius: 10px;
     padding: 20px;
     justify-content: space-between;
+    align-items: center;
+    font-size: 20px;
 }
 
 .reviewContent {
     display: flex;
     gap: 20px;
+    align-items: center;
 
 }
 
 .userIcon {
     background-color: azure;
     border-radius: 50px;
-    width: 60px;
-    height: 60px;
+    width: 80px;
+    height: 80px;
     padding: 1px;
 }
 
 .reviewInfo {
     display: flex;
     flex-direction: column;
-    gap: 15px;
+    gap: 10px;
     text-align: start;
 }
 

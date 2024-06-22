@@ -1,8 +1,6 @@
 .card {
     position: relative;
     z-index: 1;
-    width: 230px;
-    height: 300px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -26,5 +24,5 @@
 
 .description {
     padding: 10px;
-    font-weight: lighter;
+    font-weight: 300;
 }
