@@ -1,3 +1,4 @@
+import { Rating } from "./Rating";
 import { Song } from "./Song";
 
 export interface SongReview {
@@ -8,4 +9,5 @@ export interface SongReview {
     title: string,
     description: string;
     issued_at?: Date;
+    rating?: Rating;
 }

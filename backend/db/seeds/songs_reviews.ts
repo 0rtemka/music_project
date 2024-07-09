@@ -8,6 +8,20 @@ export async function seed(knex: Knex): Promise<void> {
         { login: "pepussi", password: "$2b$12$o704/iZPKtkVIzCHhiq0Pe4xeTJd0AoMSS/U7mJYrnlGZ4cjZRT4a", registration_date: "2024-05-15" }, 
     ]);
 
+    await knex("roles").del();
+
+    await knex("roles").insert([
+        { role: "USER"},
+        { role: "ADMIN"},
+    ]);
+
+    await knex("users_roles").del();
+
+    await knex("users_roles").insert([
+        { user_id: 1, role_id: 2},
+        { user_id: 2, role_id: 1},
+    ]);
+
     await knex("songs_reviews").del();
 
     await knex("songs_reviews").insert([

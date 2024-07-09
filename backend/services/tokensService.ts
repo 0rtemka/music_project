@@ -1,7 +1,7 @@
 import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
 import { tokensRepo } from "../repos/tokensRepo";
-import { UserDto } from "../web/dtos/UserDto";
+import { User } from "../models/User";
 
 dotenv.config();
 
@@ -31,7 +31,7 @@ class TokensService {
   validateAccessToken(accessToken: string) {
     try {
       const payload = jwt.verify(accessToken, process.env.JWT_ACCESS_SECRET!);
-      return payload as UserDto;
+      return payload as User;
     } catch(err) {
       return null;
     }
@@ -40,7 +40,7 @@ class TokensService {
   validateRefreshToken(refreshToken: string) {
     try {
       const payload = jwt.verify(refreshToken, process.env.JWT_REFRESH_SECRET!);
-      return payload as UserDto;
+      return payload as User;
     } catch(err) {
       return null;
     }

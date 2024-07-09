@@ -12,6 +12,17 @@ class SongsReviewsController {
             next(err);
         })
     }
+    
+    getAllByCurrentUserAndSong(req: Request, res: Response, next: NextFunction) {
+        const user = req.user!;
+        const songId = parseInt(req.params.songId);
+
+        songsReviewsService.getByUserAndSong(user.id!, songId).then(review => {
+            res.send(review);
+        }).catch(err => {
+            next(err);
+        })
+    }
 
     getAllByUser(req: Request, res: Response, next: NextFunction) {
         const userId = parseInt(req.params.userId);
@@ -19,7 +30,6 @@ class SongsReviewsController {
         songsReviewsService.getAllByUser(userId).then(reviews => {            
             res.send(reviews);
         }).catch(err => {
-            console.log(err);
             next(err);
         })
     }
@@ -36,11 +46,12 @@ class SongsReviewsController {
 
     addReview(req: Request, res: Response, next: NextFunction) {
         const user = req.user!;
-        const review: SongReview = req.body;        
-
-        songsReviewsService.add(review, user).then(() => {            
-            res.send();
+        const review: SongReview = req.body;      
+        
+        songsReviewsService.add(review, user).then((review) => {            
+            res.send(review);
         }).catch(err => {
+            console.log(err);
             next(err);
         })
     }

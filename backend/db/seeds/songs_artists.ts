@@ -4,25 +4,25 @@ export async function seed(knex: Knex): Promise<void> {
     await knex("songs").del();
 
     await knex("songs").insert([
-        {title: "deepfake", release_date: "2021-08-23"},
-        {title: "hypochondriac", release_date: "2021-08-23"},
-        {title: "limbo", release_date: "2021-08-23", is_album: "true"},
-        {title: "astrid", release_date: "2021-08-23"},
-        {title: "lifealive", release_date: "2021-08-23"},
-        {title: "432hz", release_date: "2021-08-23", is_album: "true"},
-        {title: "serenite", release_date: "2021-08-23"},
-        {title: "fuck this town", release_date: "2021-08-23"},
-        {title: "hypochondriac", release_date: "2021-08-23",is_album: "true"},
+        {title: "deepfake", release_date: "2021-08-23", cover: "deepfake.jpg"},
+        {title: "hypochondriac", release_date: "2021-08-23", cover: "hypochondriac.jpg"},
+        {title: "limbo", release_date: "2021-08-23", is_album: "true", cover: "limbo.jpg"},
+        {title: "astrid", release_date: "2021-08-23", cover: "astrid.jpg"},
+        {title: "lifealive", release_date: "2021-08-23", cover: "lifealive.jpg"},
+        {title: "432hz", release_date: "2021-08-23", is_album: "true", cover: "432hz.jpg"},
+        {title: "serenite", release_date: "2021-08-23", cover: "serenite.jpg"},
+        {title: "fuck this town", release_date: "2021-08-23", cover: "fuck_this_town.jpg"},
+        {title: "hypochondriac", release_date: "2021-08-23",is_album: "true", cover: "hypochondriac.jpg"},
     ]);
 
     await knex("artists").del();
 
     await knex("artists").insert([
-        {name: "brakence"}, 
-        {name: "glaive"}, 
-        {name: "rizza"}, 
-        {name: "ericdoa"}, 
-        {name: "sqwore"}, 
+        {name: "brakence", cover: "brakence.jpg"}, 
+        {name: "glaive", cover: "glaive.jpg"}, 
+        {name: "rizza", cover: "rizza.jpg"}, 
+        {name: "ericdoa", cover: "ericdoa.jpg"}, 
+        {name: "sqwore", cover: "sqwore.jpg"}, 
     ]);
 
     await knex("artists_songs").del();

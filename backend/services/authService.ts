@@ -1,5 +1,5 @@
 import { ApiError } from "../errors/errorRequest";
-import { UserDto } from "../web/dtos/UserDto";
+import { UserPayload } from "../web/dtos/UserPayload";
 import { tokensService } from "./tokensService";
 import { usersService } from "./usersService";
 import bcrypt from "bcrypt";
@@ -18,32 +18,35 @@ class AuthService {
       registration_date: new Date(Date.now()),
     };
 
-    const userDto = new UserDto((await usersService.add(user))[0]);
+    const savedUser = await usersService.add(user);
+    const userPayload = new UserPayload(savedUser);
 
-    const tokens = tokensService.generateTokens({ ...userDto });
-    await tokensService.saveToken(userDto.id!, tokens.refreshToken);
+    const tokens = tokensService.generateTokens({ ...userPayload });
+    await tokensService.saveToken(savedUser.id!, tokens.refreshToken);
 
     return {
       ...tokens,
-      user: userDto,
+      user: userPayload,
     };
   }
 
   async login(login: string, password: string) {
     const user = await usersService.getByLogin(login);
-    if (!user) throw ApiError.badRequest("Неверный логин или пароль");
+    if (!user) throw ApiError.badRequest("Неверный логин или пароль");    
 
-    const isPasswdsEquals = bcrypt.compare(password, user.password!);
+    const isPasswdsEquals = await bcrypt.compare(password, user.password!);
+    
     if (!isPasswdsEquals)
       throw ApiError.badRequest("Неверный логин или пароль");
 
-    const userDto = new UserDto(user);
-    const tokens = tokensService.generateTokens({ ...userDto });
-    await tokensService.saveToken(userDto.id!, tokens.refreshToken);
+    const userPayload = new UserPayload(user);
+
+    const tokens = tokensService.generateTokens({ ...userPayload });
+    await tokensService.saveToken(user.id!, tokens.refreshToken);
 
     return {
       ...tokens,
-      user: userDto,
+      user: userPayload,
     };
   }
 
@@ -54,9 +57,7 @@ class AuthService {
   async refresh(refreshToken: string) {
     if (!refreshToken) throw ApiError.unauthorized();
 
-    const userData = tokensService.validateRefreshToken(
-      refreshToken
-    ) as UserDto;
+    const userData = tokensService.validateRefreshToken(refreshToken);    
     const tokenFromDb = await tokensService.getByRefreshToken(refreshToken);
 
     if (!userData || !tokenFromDb) {
@@ -64,13 +65,14 @@ class AuthService {
     }
 
     const user = await usersService.getById(userData.id!);
-    const userDto = new UserDto(user);
-    const tokens = tokensService.generateTokens({ ...userDto });
-    await tokensService.saveToken(userDto.id!, tokens.refreshToken);
+    const userPayload = new UserPayload(user);
+        
+    const tokens = tokensService.generateTokens({ ...userPayload });
+    await tokensService.saveToken(user.id!, tokens.refreshToken);
 
     return {
       ...tokens,
-      user: userDto,
+      user: userPayload,
     };
   }
 }

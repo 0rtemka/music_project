@@ -24,4 +24,8 @@ export class ApiError {
   static unauthorized() {
     return new ApiError(401, "Пользователь не авторизован", new Date(Date.now()));
   }
+
+  static forbidden() {
+    return new ApiError(403, "Отказано в доступе", new Date(Date.now()));
+  }
 }

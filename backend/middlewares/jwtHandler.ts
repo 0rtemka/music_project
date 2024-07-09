@@ -1,11 +1,11 @@
 import { NextFunction, Request, Response } from "express";
 import { ApiError } from "../errors/errorRequest";
 import { tokensService } from "../services/tokensService";
-import { UserDto } from "../web/dtos/UserDto";
+import { User } from "../models/User";
 
 declare module 'express-serve-static-core' {
     interface Request {
-      user?: UserDto
+      user?: User
     }
 }
 

@@ -3,8 +3,7 @@ import type { Knex } from "knex";
 export async function up(knex: Knex): Promise<void> {
   return knex.schema
     .createTable("songs_rating", function (table) {
-      table.increments("id").primary();
-      table.integer("song_id").references("songs.id");
+      table.integer("song_id").primary().references("songs.id");
       table.integer("reviews_count").notNullable().defaultTo(0);
       table.float("rating", 4, 1).notNullable().checkBetween([0, 100]);
       table.float("relevance", 3, 1).notNullable().checkBetween([0, 10]);

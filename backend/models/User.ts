@@ -3,4 +3,5 @@ export interface User {
     login: string,
     password?: string,
     registration_date?: Date
+    roles?: string[]
 }

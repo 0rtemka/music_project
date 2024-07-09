@@ -4,7 +4,7 @@ import { Song } from "../../models/Song";
 import { AddSongDto } from "../dtos/AddSongDto";
 
 class SongsController {
-  getAll(req: Request, res: Response, next: NextFunction){
+  getAll(req: Request, res: Response, next: NextFunction) {
     songsService
       .getAll()
       .then((songs) => {
@@ -16,11 +16,15 @@ class SongsController {
   }
 
   getAlbums(req: Request, res: Response, next: NextFunction) {
-    songsService.getAlbums().then(albums => {
-      res.send(albums);
-    }).catch(err => {
-      next(err);
-    })
+    songsService
+      .getAlbums()
+      .then((albums) => {
+        res.send(albums);
+      })
+      .catch((err) => {
+        console.log(err);
+        next(err);
+      });
   }
 
   getById(req: Request, res: Response, next: NextFunction) {
@@ -41,7 +45,7 @@ class SongsController {
 
     const song: Song = {
       title: form.title,
-      cover: req.file?.path,
+      cover: req.file?.filename,
       is_album: form.is_album,
       release_date: form.release_date,
     };
@@ -52,6 +56,8 @@ class SongsController {
         res.status(201).send();
       })
       .catch((err) => {
+        console.log(err);
+
         next(err);
       });
   }
@@ -80,6 +86,6 @@ class SongsController {
         next(err);
       });
   }
-};
+}
 
 export const songsController = new SongsController();

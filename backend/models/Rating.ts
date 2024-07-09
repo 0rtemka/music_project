@@ -1,6 +1,6 @@
-interface Rating {
+export interface Rating {
     id?: number;
-    rating: number;
+    rating?: number;
     relevance: number;
     structure: number;
     realization: number;

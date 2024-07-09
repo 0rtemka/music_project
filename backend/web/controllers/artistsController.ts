@@ -42,7 +42,7 @@ export const artistsController = {
     const form = req.body;
     const artist: Artist = {
       name: form.name,
-      cover: req.file!.path,
+      cover: req.file!.filename,
     };
 
     artistsService
