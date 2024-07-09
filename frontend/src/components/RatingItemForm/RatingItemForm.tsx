@@ -1,14 +1,15 @@
+import { Children, PropsWithChildren } from 'react'
 import styles from './RatingItemForm.module.css'
 
 interface RatingItemProps {
-    title: string
+    title: string,
 }
 
-export default function RatingItemForm({title}: RatingItemProps) {
+export default function RatingItemForm(item: PropsWithChildren<RatingItemProps>) {
     return (
         <div className={styles.itemsForm}>
-            <span className={styles.itemTitle}>{title}</span>
-            <input className={styles.itemInput} type='text' defaultValue={3} maxLength={1}></input>
+            <span className={styles.itemTitle}>{item.title}</span>
+            <input className={styles.itemInput} type='text' maxLength={1}></input>
         </div>
     )
 }

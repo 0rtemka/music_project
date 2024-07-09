@@ -26,3 +26,8 @@
     padding: 10px;
     font-weight: 300;
 }
+
+.description:hover {
+    text-decoration: underline;
+    color: #995AFF;
+}

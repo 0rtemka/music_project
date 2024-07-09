@@ -1,9 +1,10 @@
-import Card, { CardProps } from '../Card/Card'
+import { Song } from '../../models/models'
+import Card from '../Card/Card'
 import styles from './CardsScroll.module.css'
 
 interface CardsScrollProps {
     title: string,
-    arr: CardProps[]
+    arr: Song[]
 }
 
 export default function CardsScroll(props: CardsScrollProps) {
@@ -29,15 +30,7 @@ export default function CardsScroll(props: CardsScrollProps) {
             <div className={styles.scroll} id='scroll'>
                 {
                     props.arr.map(song =>
-                        <Card
-                            img={song.img}
-                            alt={song.alt}
-                            artist={song.artist}
-                            song={song.song}
-                            rating={song.rating}
-                            artist_slug={song.artist_slug}
-                        >
-                        </Card>
+                        <Card key={song.id} song={song}/>
                     )
                 }
             </div>

@@ -1,23 +1,34 @@
 import styles from './ProfilePage.module.css'
 import CardsList from "../../components/CardsList/CardsList";
-import ProfileCard, { UserInfo } from "../../components/ProfileCard/ProfileCard";
-import ReviewCard, { Review } from "../../components/ReviewCard/ReviewCard";
-
-const userInfo: UserInfo = { name: 'username', registrationDate: new Date(Date.now()), reviewsCount: 2, profileImg: '/user.png' }
-const reviews: Review[] = [
-    { title: 'Флагманский звук', description: 'Определённо один из лучших, если не лучший трек с альбома. Очень крутая  атмосферная работа. Самое главное – вайб не ломается, трек целостный, а  многие другие треки с альбома страдают в этом плане...', cover: '/images/hypochondriac.jpg', song: 'brakence - deepfake', relevance: 4, lyrics: 5, beat: 5, structure: 5, realization: 5, rating: 86 },
-    { title: 'Атмосферно', description: 'Атмосферный семпл из старого хита артиста vertigo создает прекрасную  атмосферу, которая дополняется харизмой и эмоциональным исполнением  артиста. Бит не типичный, есть разнообразие, выполнен в стиле Brakence и  также в припеве имеются отсылку на один из его треков...', cover: '/images/astrid.jpg', song: 'glaive - astrid', relevance: 4, lyrics: 5, beat: 5, structure: 5, realization: 5, rating: 86 },
-]
+import ProfileCard from "../../components/ProfileCard/ProfileCard";
+import ReviewCard from "../../components/ReviewCard/ReviewCard";
+import { useUserReviews } from '../../hooks/useUserReviews';
+import { useNavigate, useParams } from 'react-router-dom';
+import { useAppSelector } from '../../hooks/reduxHooks';
 
 export default function ProfilePage() {
+    const { isAuth } = useAppSelector(state => state.user)
+    const { userId } = useParams();
+    const { user, reviews } = useUserReviews(userId);
+    const navigate = useNavigate();
+
+    if (!userId && !isAuth) {
+        navigate("/login")
+    }
+
     return (
         <div className={styles.profilePage}>
-            <ProfileCard userInfo={userInfo} />
-            <CardsList title="Мои рецензии">
-                {reviews.map(review =>
-                    <ReviewCard review={review} showCover={true} />
-                )}
-            </CardsList>
+            <ProfileCard userInfo={user} />
+            {reviews.length > 0 ?
+                <CardsList title={userId ? "Рецензии пользователя" : "Мои рецензии"}>
+                    {reviews.map(review =>
+                        <ReviewCard song={review.song!} review={review} showCover={true} />
+                    )}
+                </CardsList>
+                :
+                null
+            }
+
         </div>
     )
 }

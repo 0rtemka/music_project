@@ -35,6 +35,10 @@
     font-weight: 600;
 }
 
+.username:hover {
+    color: #995AFF;
+}
+
 .reviewDate {
     font-weight: 100;
 }

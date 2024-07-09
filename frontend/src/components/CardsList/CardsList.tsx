@@ -16,5 +16,4 @@ export default function CardsList(props: PropsWithChildren<CardsListProps>) {
             </div>
         </>
     )
-
 }

@@ -1,0 +1,71 @@
+.addArtist {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.artistForm {
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    padding: 30px 100px 30px 100px;
+    border-radius: 20px;
+    color: white;
+    align-items: center;
+}
+
+.addArtistTitle {
+    font-family: "Rubik Mono One", monospace;
+    font-size: 28px;
+    color: #995AFF;
+}
+
+.artistInput {
+    background-color: rgba(60, 60, 60, 0.6);
+    width: 90%;
+    border: none;
+    border-radius: 10px;
+    font-size: 18px;
+    color: white;
+    padding: 20px;
+}
+
+.fileInput {
+    width: 90%;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    gap: 80px;
+    background-color: rgba(60, 60, 60, 0.6);
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.fileInputText {
+    font-size: 18px;
+    color: #959595;
+}
+
+.file {
+    background-color: rgba(60, 60, 60, 0.6);
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.artistButton {
+    background-color: #995AFF;
+    padding: 20px;
+    width: fit-content;
+    font-size: 18px;
+    color: white;
+    border: none;
+    border-radius: 20px;
+}
+
+.preview {
+    margin-top: 50px;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}

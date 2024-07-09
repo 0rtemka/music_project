@@ -1,21 +1,19 @@
 import { useParams } from 'react-router-dom'
 import styles from './ArtistCard.module.css'
 
-export interface ArtistProps {
+export interface Artist {
     name: string,
-    profile_cover: string,
-    rating: number
+    cover: string,
+    rating: number,
+    file?: string | ArrayBuffer
 }
 
-export default function ArtistCard(props: ArtistProps) {
-    const params = useParams();
-    console.log(params.slug);
-
+export default function ArtistCard(props: Artist) {
     return (
         <div className={styles.root}>
             <div
                 className={styles.card}
-                style={{ backgroundImage: `url(${props.profile_cover})` }}
+                style={{ backgroundImage: `url(${props.file ? props.file : `/images/${props.cover}`}` }}
             >
                 <div className={styles.name}>
                     {props.name}

@@ -1,24 +1,24 @@
 import { Link } from 'react-router-dom'
 import styles from './Card.module.css'
 import SongCover from '../SongCover/SongCover'
+import { Song } from '../../models/models'
 
-export type CardProps = {
-    img: string,
-    alt: string,
-    artist: string,
-    song: string,
-    rating: number,
-    artist_slug: string
+type CardProps = {
+    song: Song
 }
 
-export default function Card(props: CardProps) {   
+export default function Card({song}: CardProps) {
     return (
         <div className={styles.card}>
-            <SongCover small={false} cover={{img: props.img, rating: props.rating, title: 'Рейтинг'}} />
-            <Link to={`/artists/${props.artist_slug}`} className={styles.title}>
-                    {props.artist}
-            </Link>
-            <span className={styles.description}>{props.song}</span>
+            <SongCover small={false} cover={{ img: `/images/${song.cover}`, rating: song.rating?.rating!, title: 'Рейтинг' }} />
+            <div>
+                {song.artists?.map(artist =>
+                    <Link key={artist.id} to={`/artists/${artist.id}`} className={styles.title}>
+                        {artist.name}
+                    </Link>
+                )}
+            </div>
+            <Link to={`/songs/${song.id}`} className={styles.description}>{song.title}</Link>
         </div>
     )
 }

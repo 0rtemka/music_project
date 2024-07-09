@@ -1,10 +1,8 @@
 import styles from './ProfileCard.module.css'
 
 export interface UserInfo {
-    name: string,
-    reviewsCount: number,
-    registrationDate: Date,
-    profileImg: string
+    login: string,
+    registration_date: string,
 }
 
 interface ProfileCardProps {
@@ -14,18 +12,18 @@ interface ProfileCardProps {
 export default function ProfileCard({ userInfo }: ProfileCardProps) {
     return (
         <div className={styles.card}>
-            <img className={styles.icon} src={userInfo.profileImg} alt='profile image'></img>
+            <img className={styles.icon} src={'/user.png'} alt='profile image'></img>
             <div className={styles.info}>
                 <div className={styles.username}>
-                    {userInfo.name}
+                    {userInfo.login}
                 </div>
                 <div className={styles.reviews}>
                     <span>Всего рецензий: </span>
-                    <span className={styles.value}>{userInfo.reviewsCount}</span>
+                    <span className={styles.value}>{3}</span>
                 </div>
                 <div className={styles.date}>
                     <span>На сайте с: </span>
-                    <span className={styles.value}>{userInfo.registrationDate.toLocaleDateString()}</span>
+                    <span className={styles.value}>{new Date(userInfo.registration_date).toLocaleDateString()}</span>
                 </div>
             </div>
         </div>

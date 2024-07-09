@@ -1,0 +1,80 @@
+.loginForm {
+    margin-top: 100px;
+    display: flex;
+}
+
+.banner {
+    padding: 30px;
+    background-color: #995AFF;
+    display: flex;
+    flex-direction: column;
+    gap: 70px;
+    width: 35%;
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+
+    span {
+        font-family: 'Rubik Mono One', monospace;
+        font-size: 26px;
+        color: #995AFF;
+        background-color: #995AFF;
+        text-shadow: -1px -1px 0 #ffffff, 1px -1px 0 #ffffff, -1px 1px 0 #ffffff, 1px 1px 0 #ffffff;
+    }
+
+    .bannerText {
+        font-size: 16px;
+    }
+}
+
+.formDiv {
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 30px;
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+    width: 65%;
+}
+
+.formHeader {
+    font-family: 'Rubik Mono One', monospace;
+    font-size: 26px;
+    color: white;
+}
+
+.formBody {
+    display: flex;
+    flex-direction: column;
+    margin-top: 30px;
+    gap: 20px;
+    align-items: center;
+    width: 100%;
+
+    input {
+        width: 80%;
+        height: 30px;
+        border-radius: 10px;
+        font-size: 18px;
+        padding: 5px 10px 5px 10px;
+    }
+
+    input::placeholder {
+        padding: 5px;
+    }
+}
+
+.loginButton {
+    width: 100px;
+    padding: 10px 15px 10px 15px;
+    border-radius: 10px;
+    background-color: #995AFF;
+    color: white;
+    font-size: 18px;
+}
+
+.formFooter {
+    font-size: 18px;
+    color: white;
+}
+
+.footerColor {
+    color: #995AFF;
+}

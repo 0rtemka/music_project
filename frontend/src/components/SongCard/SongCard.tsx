@@ -2,42 +2,32 @@ import { Link } from 'react-router-dom'
 import Rating from '../Rating/Rating'
 import RatingItemsList from '../RatingItemsList/RatingItemsList'
 import styles from './SongCard.module.css'
-
-interface Song {
-    title: string,
-    cover: string,
-    year: number,
-    artist: {
-        name: string
-    }
-    rating: {
-        rating: number,
-        relevance: number,
-        structure: number,
-        realization: number,
-        lyrics: number,
-        beat: number,
-    }
-}
+import { Song } from '../../models/models'
 
 interface SongCardProps {
     song: Song
 }
 
-export default function SongCard({ song }: SongCardProps) {
+export default function SongCard({ song }: SongCardProps) { 
     return (
         <div className={styles.songCard}>
-            <img className={styles.songCover} src={song.cover} alt='song cover'></img>
+            <img className={styles.songCover} src={`/images/${song.cover}`} alt='song cover'></img>
             <div className={styles.songInfo}>
                 <div className={styles.songTitle}>
-                    <Link to={`/artists/${song.artist.name}`} className={styles.artistLink}>{song.artist.name}</Link>
+                    <div>
+                        {song.artists?.map(artist =>
+                            <Link key={artist.id} to={`/artists/${artist.id}`} className={styles.artistLink}>{artist.name}</Link>
+                        )}
+                    </div>
                     <span>{song.title}</span>
-                    <span>{song.year}</span>
+                    <span>{new Date(song.release_date).getFullYear()}</span>
                 </div>
-                <div className={styles.ratingInfo}>
-                    <RatingItemsList items={song.rating}></RatingItemsList>
-                    <Rating rating={87} title='Средняя оценка' ></Rating>
-                </div>
+                {song.rating &&
+                    <div className={styles.ratingInfo}>
+                        <RatingItemsList items={song.rating}></RatingItemsList>
+                        <Rating rating={song.rating.rating} title='Средняя оценка' ></Rating>
+                    </div>
+                }
             </div>
         </div>
     )

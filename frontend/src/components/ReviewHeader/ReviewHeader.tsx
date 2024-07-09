@@ -1,27 +1,32 @@
+import { Link } from 'react-router-dom'
+import { Review, User } from '../../models/models'
 import Rating from '../Rating/Rating'
 import styles from './ReviewHeader.module.css'
+import { useAppSelector } from '../../hooks/reduxHooks'
 
 interface ReviewHeader {
     img: string,
-    username: string,
-    reviewDate: string,
+    user: User,
+    review: Review,
 }
 
 interface ReviewHeaderProps {
-    review: ReviewHeader
+    props: ReviewHeader
 }
 
-export default function ReviewHeader({ review }: ReviewHeaderProps) {
+export default function ReviewHeader({ props }: ReviewHeaderProps) {
+    const currentUser = useAppSelector(state => state.user.user);        
+
     return (
         <div className={styles.reviewHeader}>
             <div className={styles.reviewContent}>
-                <img className={styles.userIcon} src={review.img}></img>
+                <img className={styles.userIcon} src={props.img}></img>
                 <div className={styles.reviewInfo}>
-                    <span className={styles.username}>{review.username}</span>
-                    <span className={styles.reviewDate}>{review.reviewDate}</span>
+                    <Link to={currentUser.id == props.user.id ? "/me" :`/users/${props.user.id}`} className={styles.username}>{props.user.login}</Link>
+                    <span className={styles.reviewDate}>{new Date(props.review.issued_at).toLocaleDateString()}</span>
                 </div>
             </div>
-            <Rating rating={78} />
+            <Rating rating={props.review.rating.rating} />
         </div>
     )
 }

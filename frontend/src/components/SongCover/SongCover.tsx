@@ -19,7 +19,7 @@ export default function SongCover({cover, small}: SongCoverProps) {
             <img className={`${styles.cardImg} ${smallClass(small)}`} src={cover.img} alt='song cover' />
             <div className={`${styles.rating} ${smallClass(small)}`}>
                 <div className={styles.text}>
-                    <span className={small ? styles.ratingValueSmall : styles.ratingValue}>{cover.rating}</span>
+                    <span className={small ? styles.ratingValueSmall : styles.ratingValue}>{cover.rating.toFixed(0)}</span>
                     <span className={small ? styles.ratingTextSmall : styles.ratingText}>{cover.title}</span>
                 </div>
             </div>
