@@ -18,11 +18,11 @@ export async function seed(knex: Knex): Promise<void> {
     await knex("artists").del();
 
     await knex("artists").insert([
-        {name: "brakence", cover: "brakence.jpg"}, 
-        {name: "glaive", cover: "glaive.jpg"}, 
-        {name: "rizza", cover: "rizza.jpg"}, 
-        {name: "ericdoa", cover: "ericdoa.jpg"}, 
-        {name: "sqwore", cover: "sqwore.jpg"}, 
+        {name: "brakence", cover: "brakence.jpg", mini_cover: 'brakenceMini.jpg'}, 
+        {name: "glaive", cover: "glaive.jpg", mini_cover: 'glaiveMini.jpg'}, 
+        {name: "rizza", cover: "rizza.jpg", mini_cover: 'rizzaMini.jpg'}, 
+        {name: "ericdoa", cover: "ericdoa.jpg", mini_cover: 'ericdoaMini.jpg'}, 
+        {name: "sqwore", cover: "sqwore.jpg", mini_cover: 'sqworeMini.jpg'}, 
     ]);
 
     await knex("artists_songs").del();

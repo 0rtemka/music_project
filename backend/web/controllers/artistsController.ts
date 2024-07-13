@@ -2,19 +2,46 @@ import { NextFunction, Request, Response } from "express";
 import { artistsService } from "../../services/artistsService";
 import { Artist } from "../../models/Artist";
 
-export const artistsController = {
-  getAll: (req: Request, res: Response, next: NextFunction) => {
+export class ArtistsController {
+  getAll(req: Request, res: Response, next: NextFunction) {
+    if (req.query.name) {
+      const artistName = req.query.name as string;
+
+      artistsService
+        .getWhereNameLike(artistName)
+        .then((artists) => {
+          res.send(artists);
+        })
+        .catch((err) => {
+          next(err);
+        });
+    } else {
+      artistsService
+        .getAll()
+        .then((artists) => {
+          res.send(artists);
+        })
+        .catch((err) => {
+          next(err);
+        });
+    }
+  }
+
+  getWhereNameLike(req: Request, res: Response, next: NextFunction) {
+    const artistName = req.query.name as string;
+    console.log(artistName);
+
     artistsService
-      .getAll()
+      .getWhereNameLike(artistName)
       .then((artists) => {
         res.send(artists);
       })
       .catch((err) => {
         next(err);
       });
-  },
+  }
 
-  getById: (req: Request, res: Response, next: NextFunction) => {
+  getById(req: Request, res: Response, next: NextFunction) {
     const artistId = parseInt(req.params.artistId);
     artistsService
       .getById(artistId)
@@ -24,9 +51,9 @@ export const artistsController = {
       .catch((err) => {
         next(err);
       });
-  },
+  }
 
-  getSongs: (req: Request, res: Response, next: NextFunction) => {
+  getSongs(req: Request, res: Response, next: NextFunction) {
     const artistId: number = parseInt(req.params.artistId);
     artistsService
       .getArtistsSongs(artistId)
@@ -36,13 +63,30 @@ export const artistsController = {
       .catch((err) => {
         next(err);
       });
-  },
+  }
 
-  add: (req: Request, res: Response, next: NextFunction) => {
+  getAlbums(req: Request, res: Response, next: NextFunction) {
+    const artistId: number = parseInt(req.params.artistId);
+    artistsService
+      .getArtistsAlbums(artistId)
+      .then((albums) => {
+        res.send(albums);
+      })
+      .catch((err) => {
+        next(err);
+      });
+  }
+
+  add(req: Request, res: Response, next: NextFunction) {
     const form = req.body;
+    const files: any = req.files;
+    const cover = files.cover ? files.cover[0] : null;
+    const miniCover = files.miniCover ? files.miniCover[0] : null;    
+
     const artist: Artist = {
       name: form.name,
-      cover: req.file!.filename,
+      cover: cover.filename,
+      mini_cover: miniCover.filename,
     };
 
     artistsService
@@ -53,9 +97,9 @@ export const artistsController = {
       .catch((err) => {
         next(err);
       });
-  },
+  }
 
-  update: (req: Request, res: Response, next: NextFunction) => {
+  update(req: Request, res: Response, next: NextFunction) {
     const artistId: number = parseInt(req.params.artistId);
     artistsService
       .update(artistId, req.body)
@@ -65,9 +109,9 @@ export const artistsController = {
       .catch((err) => {
         next(err);
       });
-  },
+  }
 
-  delete: (req: Request, res: Response, next: NextFunction) => {
+  delete(req: Request, res: Response, next: NextFunction) {
     const artistId: number = parseInt(req.params.artistId);
     artistsService
       .delete(artistId)
@@ -77,5 +121,7 @@ export const artistsController = {
       .then((err) => {
         next(err);
       });
-  },
-};
+  }
+}
+
+export const artistsController = new ArtistsController();

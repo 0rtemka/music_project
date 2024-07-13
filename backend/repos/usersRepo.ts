@@ -5,8 +5,14 @@ const Users = () => pg<User>("users");
 
 class UsersRepo {
   async findById(userId: number) {
-    return Users()
-      .select("users.*", pg.raw("json_agg(roles.role) as roles"))
+    return await Users()
+      .select(
+        "users.*",
+        pg.raw("json_agg(distinct roles.role) as roles"),
+        pg.raw(`(select count(*) from users u
+                join songs_reviews sr on sr.user_id = u.id
+                where u.id = ${userId}) as reviews_count`)
+      )
       .join("users_roles", "users_roles.user_id", "users.id")
       .join("roles", "roles.id", "users_roles.role_id")
       .where("users.id", "=", userId)
@@ -25,9 +31,7 @@ class UsersRepo {
   }
 
   async save(user: User) {
-    return Users()
-      .insert(user)
-      .returning("*");
+    return Users().insert(user).returning("*");
   }
 
   async saveRole(userId: number, role: string) {

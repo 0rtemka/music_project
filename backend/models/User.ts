@@ -4,4 +4,5 @@ export interface User {
     password?: string,
     registration_date?: Date
     roles?: string[]
+    reviews_count?: number
 }

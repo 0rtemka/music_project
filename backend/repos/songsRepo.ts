@@ -13,13 +13,99 @@ class SongsRepo {
         pg.raw(
           `json_build_object('id', songs_rating.song_id, 'rating', songs_rating.rating, 'relevance', songs_rating.relevance,
           'structure', songs_rating.structure, 'realization', songs_rating.realization, 'lyrics', songs_rating.lyrics,
-          'beat', songs_rating.beat) as rating`
+          'beat', songs_rating.beat, 'reviews_count', songs_rating.reviews_count) as rating`
         )
       )
       .join("artists_songs", "songs.id", "=", "artists_songs.song_id")
       .join("artists", "artists.id", "=", "artists_songs.artist_id")
       .join("songs_rating", "songs_rating.song_id", "=", "songs.id")
       .groupBy("songs.id", "songs_rating.song_id");
+  }
+
+  async findLatestSongs() {
+    return Songs()
+      .select(
+        "songs.*",
+        pg.raw("(json_agg(artists.*)) as artists"),
+        pg.raw(
+          `json_build_object('id', songs_rating.song_id, 'rating', songs_rating.rating, 'relevance', songs_rating.relevance,
+          'structure', songs_rating.structure, 'realization', songs_rating.realization, 'lyrics', songs_rating.lyrics,
+          'beat', songs_rating.beat, 'reviews_count', songs_rating.reviews_count) as rating`
+        )
+      )
+      .join("artists_songs", "songs.id", "=", "artists_songs.song_id")
+      .join("artists", "artists.id", "=", "artists_songs.artist_id")
+      .join("songs_rating", "songs_rating.song_id", "=", "songs.id")
+      .where("is_album", "=", "false")
+      .where(
+        pg.raw(
+          "extract(day from now() - songs.release_date) <= 7 and songs.release_date < now()"
+        )
+      )
+      .groupBy("songs.id", "songs_rating.song_id");
+  }
+
+  async findLatestAlbums() {
+    return Songs()
+      .select(
+        "songs.*",
+        pg.raw("(json_agg(artists.*)) as artists"),
+        pg.raw(
+          `json_build_object('id', songs_rating.song_id, 'rating', songs_rating.rating, 'relevance', songs_rating.relevance,
+          'structure', songs_rating.structure, 'realization', songs_rating.realization, 'lyrics', songs_rating.lyrics,
+          'beat', songs_rating.beat, 'reviews_count', songs_rating.reviews_count) as rating`
+        )
+      )
+      .join("artists_songs", "songs.id", "=", "artists_songs.song_id")
+      .join("artists", "artists.id", "=", "artists_songs.artist_id")
+      .join("songs_rating", "songs_rating.song_id", "=", "songs.id")
+      .where("is_album", "=", "true")
+      .where(
+        pg.raw(
+          "extract(day from now() - release_date) <= 7 and release_date < now()"
+        )
+      )
+      .groupBy("songs.id", "songs_rating.song_id");
+  }
+
+  async findTopSongs() {
+    return Songs()
+      .select(
+        "songs.*",
+        pg.raw("(json_agg(artists.*)) as artists"),
+        pg.raw(
+          `json_build_object('id', songs_rating.song_id, 'rating', songs_rating.rating, 'relevance', songs_rating.relevance,
+          'structure', songs_rating.structure, 'realization', songs_rating.realization, 'lyrics', songs_rating.lyrics,
+          'beat', songs_rating.beat, 'reviews_count', songs_rating.reviews_count) as rating`
+        )
+      )
+      .join("artists_songs", "songs.id", "=", "artists_songs.song_id")
+      .join("artists", "artists.id", "=", "artists_songs.artist_id")
+      .join("songs_rating", "songs_rating.song_id", "=", "songs.id")
+      .where("is_album", "=", "false")
+      .groupBy("songs.id", "songs_rating.song_id")
+      .orderBy("songs_rating.rating", "desc")
+      .limit(30);
+  }
+
+  async findTopAlbums() {
+    return Songs()
+      .select(
+        "songs.*",
+        pg.raw("(json_agg(artists.*)) as artists"),
+        pg.raw(
+          `json_build_object('id', songs_rating.song_id, 'rating', songs_rating.rating, 'relevance', songs_rating.relevance,
+          'structure', songs_rating.structure, 'realization', songs_rating.realization, 'lyrics', songs_rating.lyrics,
+          'beat', songs_rating.beat, 'reviews_count', songs_rating.reviews_count) as rating`
+        )
+      )
+      .join("artists_songs", "songs.id", "=", "artists_songs.song_id")
+      .join("artists", "artists.id", "=", "artists_songs.artist_id")
+      .join("songs_rating", "songs_rating.song_id", "=", "songs.id")
+      .where("is_album", "=", "true")
+      .groupBy("songs.id", "songs_rating.song_id")
+      .orderBy("songs_rating.rating", "desc")
+      .limit(30);
   }
 
   async findAlbums() {
@@ -30,13 +116,32 @@ class SongsRepo {
         pg.raw(
           `json_build_object('id', songs_rating.song_id, 'rating', songs_rating.rating, 'relevance', songs_rating.relevance,
           'structure', songs_rating.structure, 'realization', songs_rating.realization, 'lyrics', songs_rating.lyrics,
-          'beat', songs_rating.beat) as rating`
+          'beat', songs_rating.beat, 'reviews_count', songs_rating.reviews_count) as rating`
         )
       )
       .join("artists_songs", "songs.id", "=", "artists_songs.song_id")
       .join("artists", "artists.id", "=", "artists_songs.artist_id")
       .join("songs_rating", "songs_rating.song_id", "=", "songs.id")
       .where("is_album", "=", "true")
+      .groupBy("songs.id", "songs_rating.song_id");
+  }
+
+  async findAlbumsWhereTitleLike(title: string) {
+    return Songs()
+      .select(
+        "songs.*",
+        pg.raw("(json_agg(artists.*)) as artists"),
+        pg.raw(
+          `json_build_object('id', songs_rating.song_id, 'rating', songs_rating.rating, 'relevance', songs_rating.relevance,
+          'structure', songs_rating.structure, 'realization', songs_rating.realization, 'lyrics', songs_rating.lyrics,
+          'beat', songs_rating.beat, 'reviews_count', songs_rating.reviews_count) as rating`
+        )
+      )
+      .join("artists_songs", "songs.id", "=", "artists_songs.song_id")
+      .join("artists", "artists.id", "=", "artists_songs.artist_id")
+      .join("songs_rating", "songs_rating.song_id", "=", "songs.id")
+      .where("is_album", "=", "true")
+      .andWhere((sql) => sql.whereILike("songs.title", `%${title}%`).orWhereILike("artists.name", `%${title}%`))
       .groupBy("songs.id", "songs_rating.song_id");
   }
 
@@ -48,7 +153,7 @@ class SongsRepo {
         pg.raw(
           `json_build_object('id', songs_rating.song_id, 'rating', songs_rating.rating, 'relevance', songs_rating.relevance,
           'structure', songs_rating.structure, 'realization', songs_rating.realization, 'lyrics', songs_rating.lyrics,
-          'beat', songs_rating.beat) as rating`
+          'beat', songs_rating.beat, 'reviews_count', songs_rating.reviews_count) as rating`
         )
       )
       .join("artists_songs", "songs.id", "=", "artists_songs.song_id")
@@ -59,19 +164,56 @@ class SongsRepo {
       .first();
   }
 
-  async findByArtistId(artistId: number) {
+  async findSongsWhereTitleLike(title: string) {
+    return Songs()
+      .select(
+        "songs.*",
+        pg.raw("(json_agg(artists.*)) as artists"),
+        pg.raw(
+          `json_build_object('id', songs_rating.song_id, 'rating', songs_rating.rating, 'relevance', songs_rating.relevance,
+          'structure', songs_rating.structure, 'realization', songs_rating.realization, 'lyrics', songs_rating.lyrics,
+          'beat', songs_rating.beat, 'reviews_count', songs_rating.reviews_count) as rating`
+        )
+      )
+      .join("artists_songs", "songs.id", "=", "artists_songs.song_id")
+      .join("artists", "artists.id", "=", "artists_songs.artist_id")
+      .join("songs_rating", "songs_rating.song_id", "=", "songs.id")
+      .where("is_album", "=", "false")
+      .andWhere((sql) => sql.whereILike("songs.title", `%${title}%`).orWhereILike("artists.name", `%${title}%`))
+      .groupBy("songs.id", "songs_rating.song_id");
+  }
+
+  async findSongsByArtistId(artistId: number) {
     return Songs()
       .select(
         "songs.*",
         pg.raw(
           `json_build_object('id', songs_rating.song_id, 'rating', songs_rating.rating, 'relevance', songs_rating.relevance,
           'structure', songs_rating.structure, 'realization', songs_rating.realization, 'lyrics', songs_rating.lyrics,
-          'beat', songs_rating.beat) as rating`
+          'beat', songs_rating.beat, 'reviews_count', songs_rating.reviews_count) as rating`
         )
       )
       .join("artists_songs", "songs.id", "=", "artists_songs.song_id")
       .join("artists", "artists.id", "=", "artists_songs.artist_id")
       .join("songs_rating", "songs_rating.song_id", "=", "songs.id")
+      .where("is_album", "=", "false")
+      .where("artist_id", "=", artistId);
+  }
+
+  async findAlbumsByArtistId(artistId: number) {
+    return Songs()
+      .select(
+        "songs.*",
+        pg.raw(
+          `json_build_object('id', songs_rating.song_id, 'rating', songs_rating.rating, 'relevance', songs_rating.relevance,
+          'structure', songs_rating.structure, 'realization', songs_rating.realization, 'lyrics', songs_rating.lyrics,
+          'beat', songs_rating.beat, 'reviews_count', songs_rating.reviews_count) as rating`
+        )
+      )
+      .join("artists_songs", "songs.id", "=", "artists_songs.song_id")
+      .join("artists", "artists.id", "=", "artists_songs.artist_id")
+      .join("songs_rating", "songs_rating.song_id", "=", "songs.id")
+      .where("is_album", "=", "true")
       .where("artist_id", "=", artistId);
   }
 

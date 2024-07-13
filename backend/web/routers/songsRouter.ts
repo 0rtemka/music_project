@@ -9,6 +9,10 @@ export const songsRouter = Router();
 
 songsRouter.get("/albums", songsController.getAlbums);
 songsRouter.get("/songs", songsController.getAll);
+songsRouter.get("/songs/latest", songsController.getLatestSongs);
+songsRouter.get("/albums/latest", songsController.getLatestAlbums);
+songsRouter.get("/songs/top", songsController.getTopSongs);
+songsRouter.get("/albums/top", songsController.getTopAlbums);
 songsRouter.get("/songs/:songId", songsController.getById);
 songsRouter.get("/songs/:songId/reviews", songsReviewsController.getAllBySong);
 songsRouter.post("/songs", jwtHandler ,checkAdminRoleHandler, upload.single("cover"), songsController.add);

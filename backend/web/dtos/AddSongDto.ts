@@ -4,5 +4,5 @@ export interface AddSongDto {
     cover: string,
     release_date: Date,
     is_album: boolean;
-    artistsIds: number[]
+    artistsIds: number[] | number
 } 

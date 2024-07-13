@@ -9,8 +9,28 @@ class SongsService {
     return await songsRepo.findAll();
   }
 
+  async getLatestSongs() {
+    return await songsRepo.findLatestSongs();
+  }
+
+  async getLatestAlbums() {
+    return await songsRepo.findLatestAlbums();
+  }
+
+  async getTopSongs() {
+    return await songsRepo.findTopSongs();
+  }
+
+  async getTopAlbums() {
+    return await songsRepo.findTopAlbums();
+  }
+
   async getAlbums() {
     return await songsRepo.findAlbums();
+  }
+
+  async getAlbumsWhereTitleLike(title: string) {
+    return await songsRepo.findAlbumsWhereTitleLike(title);
   }
 
   async getById(songId: number) {
@@ -25,8 +45,16 @@ class SongsService {
     return song;
   }
 
-  async getByArtistId(artistId: number) {
-    return await songsRepo.findByArtistId(artistId);
+  async getSongsWhereTitleLike(title: string) {
+    return await songsRepo.findSongsWhereTitleLike(title);
+  }
+
+  async getSongsByArtistId(artistId: number) {
+    return await songsRepo.findSongsByArtistId(artistId);
+  }
+
+  async getAlbumsByArtistId(artistId: number) {
+    return await songsRepo.findAlbumsByArtistId(artistId);
   }
 
   async add(song: Song, artistsIds: number[]) {
@@ -47,6 +75,6 @@ class SongsService {
   async delete(songId: number) {
     await songsRepo.delete(songId);
   }
-};
+}
 
 export const songsService = new SongsService();

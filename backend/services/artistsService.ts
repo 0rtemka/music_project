@@ -19,12 +19,29 @@ class ArtistsService {
     return artist;
   }
 
+  async getByName(name: string) {
+    return await artistsRepo.findByName(name); 
+  }
+
+  async getWhereNameLike(artistName: string) {
+    return await artistsRepo.findWhereNameLike(artistName);
+  }
+
   async getArtistsSongs(artistId: number) {
-      const artist = await artistsService.getById(artistId);
-      return await songsService.getByArtistId(artistId);
+    const artist = await artistsService.getById(artistId);
+    return await songsService.getSongsByArtistId(artistId);
+  }
+
+  async getArtistsAlbums(artistId: number) {
+    const artist = await artistsService.getById(artistId);
+    return await songsService.getAlbumsByArtistId(artistId);
   }
 
   async add(artist: Artist) {
+    const artistFromDb = await this.getByName(artist.name);
+    if (artistFromDb) {
+      throw ApiError.badRequest(`Артист с именем ${artist.name} уже существует`)
+    }
     return await artistsRepo.save(artist);
   }
 
@@ -35,6 +52,6 @@ class ArtistsService {
   async delete(artistId: number) {
     return await artistsRepo.delete(artistId);
   }
-};
+}
 
 export const artistsService = new ArtistsService();
