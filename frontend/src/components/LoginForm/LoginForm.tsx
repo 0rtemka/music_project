@@ -3,7 +3,7 @@ import styles from "./LoginForm.module.css"
 import { useState } from "react"
 import { useDispatch } from "react-redux";
 import { setAuth, setUser } from "../../store/reducers/userReducer";
-import AuthService from "../../http/AuthService";
+import AuthService from "../../services/AuthService";
 import { AuthError } from "../AuthError/AuthError";
 
 export function LoginForm() {
@@ -35,18 +35,18 @@ export function LoginForm() {
             </div>
             <div className={styles.formDiv}>
                 <span className={styles.formHeader}>ВХОД</span>
-                <form className={styles.formBody}>
+                <form className={styles.formBody} onSubmit={(e) => {
+                    e.preventDefault();
+                    loginFunc();
+                }
+                }>
                     {errMessage ?
                         <AuthError message={errMessage} /> :
                         null
                     }
-                    <input type="text" placeholder="Логин" value={userLogin} onChange={e => setUserLogin(e.target.value)}></input>
-                    <input type="password" placeholder="Пароль" value={password} onChange={e => setPassword(e.target.value)}></input>
-                    <button className={styles.loginButton} onClick={(e) => {
-                        e.preventDefault();
-                        loginFunc();
-                    }
-                    }>Войти</button>
+                    <input required type="text" placeholder="Логин" value={userLogin} onChange={e => setUserLogin(e.target.value)}></input>
+                    <input required type="password" placeholder="Пароль" value={password} onChange={e => setPassword(e.target.value)}></input>
+                    <button className={styles.loginButton}>Войти</button>
                     <span className={styles.formFooter}>Нет аккаунта?
                         <Link to='/registration' className={styles.footerColor}> Зарегистрируйтесь</Link>
                     </span>

@@ -1,0 +1,30 @@
+.artistSearchCard {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+  width: fit-content;
+  background-color: rgba(0, 0, 0, 0.3);
+  padding: 15px;
+  border-radius: 10px;
+}
+
+.artistImg {
+  width: 200px;
+  height: 200px;
+  border-radius: 100px;
+  background-size: cover;
+  background-position: center;
+}
+
+.artistName {
+  color: white;
+  font-size: 18px;
+}
+
+.artistSearchCard:hover {
+  .artistName {
+    text-decoration: underline;
+    color: #995aff;
+  }
+}

@@ -18,7 +18,9 @@ export const useUserReviews = (userId?: string) => {
             });
         } else {
             setReviews([]);
-            setUser(currentUser);
+            api.get(`${API_URL}/me`).then(res => {
+                setUser(res.data);
+            });
             api.get(`${API_URL}/me/reviews`).then(res => {
                 setReviews(res.data);
             });

@@ -3,7 +3,6 @@
     justify-content: center;
 }
 
-
 .card {
     background-size: cover;
     height: 350px;
@@ -37,7 +36,7 @@
 }
 
 .ratingValue {
-    font-size: 56px;
+    font-size: 40px;
     color: #995AFF;
     border: #995AFF solid;
     border-radius: 10px;

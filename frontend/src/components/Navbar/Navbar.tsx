@@ -1,10 +1,11 @@
 import { Link, NavLink } from "react-router-dom";
 import styles from './Navbar.module.css'
 import { useAppSelector } from "../../hooks/reduxHooks";
-import AuthService from "../../http/AuthService";
+import AuthService from "../../services/AuthService";
 import { useDispatch } from "react-redux";
 import { setAuth, setUser } from "../../store/reducers/userReducer";
 import { User } from "../../models/models";
+import { clearSearch } from "../../store/reducers/searchReducer";
 
 const setActive = (isActive: boolean) => isActive ? styles.active : '';
 
@@ -16,7 +17,8 @@ export default function Navbar() {
         AuthService.logout().then(() => {
             localStorage.removeItem("token");
             dispatch(setAuth(false));
-            dispatch(setUser({} as User))
+            dispatch(setUser({} as User));
+            dispatch(clearSearch());
         })
     ]
 

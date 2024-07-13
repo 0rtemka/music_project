@@ -2,7 +2,7 @@ import { Route, Routes } from 'react-router-dom'
 import './App.css'
 import Root from './pages/RootPage/Root'
 import ProfilePage from './pages/ProfilePage/ProfilePage'
-import ErrorPage from './pages/ErrorPage'
+import ErrorPage from './pages/NotFoundPage/NotFoundPage'
 import Layout from './components/Layout'
 import AddContentPage from './pages/AddContentPage/AddContentPage'
 import ArtistPage from './pages/ArtistPage/ArtistPage'
@@ -15,6 +15,7 @@ import { setAuth, setUser } from './store/reducers/userReducer'
 import axios from 'axios'
 import { API_URL } from './http'
 import { LoginPage } from './pages/LoginPage/LoginPage'
+import { FindPage } from './pages/FindPage/FindPage'
 
 function App() {
   const dispatch = useDispatch();
@@ -42,6 +43,7 @@ function App() {
           <Route path='users/:userId' element={<ProfilePage />} />
           <Route path='artists/:artistId' element={<ArtistPage />} />
           <Route path='songs/:songId' element={<SongPage />} />
+          <Route path='search' element={<FindPage />} />
           <Route path='login' element={<LoginPage />} />
           <Route path='registration' element={<RegistrationPage />} />
           <Route path='*' element={<ErrorPage />} />

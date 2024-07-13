@@ -11,6 +11,7 @@ export type Artist = {
     id: string,
     name: string,
     cover: string,
+    mini_cover: string,
     rating: number
 }
 
@@ -21,6 +22,7 @@ export type Rating = {
     realization: number,
     lyrics: number,
     beat: number,
+    reviews_count: number,
 }
 
 export type Review = {
@@ -37,7 +39,8 @@ export type User = {
     id: string,
     login: string,
     registration_date: string,
-    roles: string[]
+    roles: string[],
+    reviews_count: number
 }
 
 export type AuthResponse = {

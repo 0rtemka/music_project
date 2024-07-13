@@ -7,7 +7,7 @@ export function LoginPage() {
     const navigate = useNavigate();    
 
     if (isAuth) {
-        navigate("/me");
+        navigate("/");
     }
 
     return (

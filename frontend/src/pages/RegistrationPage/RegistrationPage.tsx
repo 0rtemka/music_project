@@ -6,10 +6,8 @@ export function RegistrationPage() {
     const { isAuth } = useAppSelector(state => state.user);
     const navigate = useNavigate();
 
-    console.log(isAuth);
-
     if (isAuth) {
-        navigate("/me");
+        navigate("/");
     }
 
     return (

@@ -11,6 +11,7 @@ import { useAppSelector } from '../../hooks/reduxHooks';
 import { NeedAuthCard } from '../../components/NeedAuthCard/NeedAuthCard';
 import { useCurUserReview } from '../../hooks/useCurUserReview';
 import RatingFormBody from '../../components/RatingFormBody/RatingFormBody';
+import ErrorPage from '../NotFoundPage/NotFoundPage';
 
 export default function SongPage() {
     const { user, isAuth } = useAppSelector(state => state.user)
@@ -19,6 +20,9 @@ export default function SongPage() {
     const curUserReview = useCurUserReview(songId!);
     const reviews = useReviews(songId!).filter(review => review.user_id !== user.id);
 
+    if (!song.id) {
+        return <ErrorPage />
+    }
 
     return (
         <div className={styles.songPage}>

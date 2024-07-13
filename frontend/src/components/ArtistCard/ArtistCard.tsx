@@ -1,4 +1,3 @@
-import { useParams } from 'react-router-dom'
 import styles from './ArtistCard.module.css'
 
 export interface Artist {
@@ -18,12 +17,16 @@ export default function ArtistCard(props: Artist) {
                 <div className={styles.name}>
                     {props.name}
                 </div>
-                <div className={styles.rating}>
-                    <div className={styles.ratingValue}>
-                        {props.rating}
+                {props.rating ?
+                    <div className={styles.rating}>
+                        <div className={styles.ratingValue}>
+                            {props.rating}
+                        </div>
+                        <span className={styles.ratingText}>Средний рейтинг</span>
                     </div>
-                    <span className={styles.ratingText}>Средний рейтинг</span>
-                </div>
+                    : null
+                }
+
             </div>
         </div>
     )

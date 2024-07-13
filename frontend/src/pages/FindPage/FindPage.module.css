@@ -1,0 +1,45 @@
+.searchPage {
+  margin-top: 100px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.searchForm {
+    display: flex;
+    gap: 10px;
+
+}
+
+.searchFormTitle {
+    font-size: 20px;
+    color: white;
+    text-align: start;
+}
+
+.searchInput {
+  background-color: rgba(60, 60, 60, 0.6);
+  width: 80%;
+  border: none;
+  border-radius: 10px;
+  font-size: 18px;
+  color: white;
+  padding: 20px;
+}
+
+.searchButton {
+    background-color: #995AFF;
+    padding: 20px;
+    width: 20%;
+    font-size: 18px;
+    color: white;
+    border: none;
+    border-radius: 10px;
+}
+
+
+.errorCard {
+  margin-top: 50px;
+  display: flex;
+  justify-content: center;
+}

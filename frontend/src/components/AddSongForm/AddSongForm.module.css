@@ -1,64 +1,126 @@
 .addSong {
-    display: flex;
-    flex-direction: column;
-    gap: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
 }
 
 .addSongTitle {
-    font-family: 'Rubik Mono One', monospace;
-    font-size: 28px;
-    color: #995AFF;
+  font-family: "Rubik Mono One", monospace;
+  font-size: 28px;
+  color: #995aff;
 }
 
 .addSongForm {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    align-items: center;
-    background-color: rgba(0, 0, 0, 0.7);
-    padding: 30px 100px 30px 100px;
-    border-radius: 20px;
-    color: white;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.7);
+  padding: 30px 100px 30px 100px;
+  border-radius: 20px;
+  color: white;
 }
 
 .addSongInput {
-    background-color: rgba(60, 60, 60, 0.6);
-    width: 90%;
-    border: none;
-    border-radius: 10px;
-    font-size: 18px;
-    color: white;
-    padding: 20px;
+  background-color: rgba(60, 60, 60, 0.6);
+  width: 90%;
+  border: none;
+  border-radius: 10px;
+  font-size: 18px;
+  color: white;
+  padding: 20px;
 }
 
 .addSongFileInput {
-    width: 90%;
-    display: flex;
-    justify-content: start;
-    align-items: center;
-    gap: 80px;
-    background-color: rgba(60, 60, 60, 0.6);
-    padding: 20px;
-    border-radius: 10px;
+  width: 90%;
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  gap: 80px;
+  background-color: rgba(60, 60, 60, 0.6);
+  padding: 20px;
+  border-radius: 10px;
 }
 
 .addSongFileTitle {
-    font-size: 18px;
-    color: #959595;
+  font-size: 18px;
+  color: #959595;
 }
 
 .addSongfile {
-    background-color: rgba(60, 60, 60, 0.6);
-    padding: 20px;
-    border-radius: 10px;
+  background-color: rgba(60, 60, 60, 0.6);
+  padding: 20px;
+  border-radius: 10px;
 }
 
 .addSongButton {
-    background-color: #995AFF;
-    padding: 20px;
-    width: fit-content;
+  background-color: #995aff;
+  padding: 20px;
+  width: fit-content;
+  font-size: 18px;
+  color: white;
+  border: none;
+  border-radius: 20px;
+}
+
+.addArtistButton {
+  background-color: #86789d;
+  padding: 20px;
+  width: fit-content;
+  font-size: 18px;
+  color: white;
+  border: none;
+  border-radius: 20px;
+}
+
+.selectArtistInput {
+  width: 95%;
+  display: flex;
+  gap: 10px;
+}
+
+.error {
+  border: 1px solid red;
+}
+
+.selectedArtists {
+  display: flex;
+  gap: 10px;
+}
+
+.selectedArtist {
+  background-color: #86789d;
+  padding: 10px;
+  border-radius: 10px;
+  border: none;
+  font-size: 18px;
+  color: white;
+  cursor: pointer;
+}
+
+.releaseDate {
+  width: 95%;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.releaseDateTitle {
+  width: 30%;
+  color: #959595;
+}
+
+.checkAlbumInput {
+    background-color: rgba(60, 60, 60, 0.6);
+    width: 90%;
+    border: none;
+    border-radius: 10px;
     font-size: 18px;
     color: white;
-    border: none;
-    border-radius: 20px;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    color: #959595;
+    align-items: center;
 }

@@ -3,7 +3,7 @@ import styles from './RegistrationForm.module.css'
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { setAuth, setUser } from '../../store/reducers/userReducer';
-import AuthService from '../../http/AuthService';
+import AuthService from '../../services/AuthService';
 import { AuthError } from '../AuthError/AuthError';
 
 export function RegistrationForm() {
@@ -37,19 +37,19 @@ export function RegistrationForm() {
             </div>
             <div className={styles.formDiv}>
                 <span className={styles.formHeader}>Регистрация</span>
-                <form className={styles.formBody}>
+                <form className={styles.formBody} onSubmit={(e) => {
+                    e.preventDefault();
+                    registerFunc();
+                }
+                }>
                     {errMessage ?
                         <AuthError message={errMessage} /> :
                         null
                     }
-                    <input type="text" placeholder="Логин" value={userLogin} onChange={e => setUserLogin(e.target.value)}></input>
-                    <input type="password" placeholder="Пароль" value={password} onChange={e => setPassword(e.target.value)}></input>
-                    <input type="password" placeholder="Подтверждения пароля" value={passwordConfirm} onChange={e => setPasswordConfirm(e.target.value)}></input>
-                    <button className={styles.registrationButton} onClick={(e) => {
-                        e.preventDefault();
-                        registerFunc();
-                    }
-                    }>Создать</button>
+                    <input required type="text" placeholder="Логин" value={userLogin} onChange={e => setUserLogin(e.target.value)}></input>
+                    <input required type="password" placeholder="Пароль" value={password} onChange={e => setPassword(e.target.value)}></input>
+                    <input required type="password" placeholder="Подтверждения пароля" value={passwordConfirm} onChange={e => setPasswordConfirm(e.target.value)}></input>
+                    <button className={styles.registrationButton}>Создать</button>
                     <span className={styles.formFooter}>Уже есть аккаунт?
                         <Link to='/login' className={styles.footerColor}> Войдите</Link>
                     </span>

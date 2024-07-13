@@ -8,7 +8,7 @@ interface RatingProps {
 export default function Rating({rating, title}: RatingProps) {
     return (
         <div className={styles.rating}>
-            <span className={styles.ratingValue}>{rating.toFixed(0)}</span>
+            <span className={styles.ratingValue}>{rating}</span>
             <span className={styles.ratingTitle}>{title}</span>
         </div>
     )

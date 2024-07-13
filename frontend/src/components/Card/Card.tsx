@@ -10,8 +10,11 @@ type CardProps = {
 export default function Card({song}: CardProps) {
     return (
         <div className={styles.card}>
-            <SongCover small={false} cover={{ img: `/images/${song.cover}`, rating: song.rating?.rating!, title: 'Рейтинг' }} />
-            <div>
+            <SongCover 
+                small={false} 
+                cover={{ img: `/images/${song.cover}`, rating: song.rating!, title: 'Рейтинг' }} 
+            />
+            <div style={{marginTop: '10px'}}>
                 {song.artists?.map(artist =>
                     <Link key={artist.id} to={`/artists/${artist.id}`} className={styles.title}>
                         {artist.name}

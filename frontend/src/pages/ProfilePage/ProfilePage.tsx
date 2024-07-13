@@ -18,11 +18,11 @@ export default function ProfilePage() {
 
     return (
         <div className={styles.profilePage}>
-            <ProfileCard userInfo={user} />
+            <ProfileCard user={user} />
             {reviews.length > 0 ?
                 <CardsList title={userId ? "Рецензии пользователя" : "Мои рецензии"}>
                     {reviews.map(review =>
-                        <ReviewCard song={review.song!} review={review} showCover={true} />
+                        <ReviewCard key={review.id} song={review.song!} review={review} showCover={true} />
                     )}
                 </CardsList>
                 :
