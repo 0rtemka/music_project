@@ -4,7 +4,8 @@ import styles from './ReviewCard.module.css'
 import ReviewHeader from '../ReviewHeader/ReviewHeader';
 import { Review, Song } from '../../models/models';
 import { useUser } from '../../hooks/useUser';
-import { useAppSelector } from '../../hooks/reduxHooks';
+import { observer } from 'mobx-react-lite';
+import { userDataStore } from '../../store/mobx/userDataStore';
 
 interface ReviewCardProps {
     review: Review;
@@ -12,14 +13,13 @@ interface ReviewCardProps {
     showCover?: boolean
 }
 
-export default function ReviewCard({ review, song, showCover }: ReviewCardProps) {    
-    if (!review.rating) return null;
-    
+const  ReviewCard = observer(({ review, song, showCover }: ReviewCardProps) => {
     const user = useUser(review.user_id);
-    const currentUser = useAppSelector(state => state.user.user);    
-    
+
+    if (!review.rating) return null;
+
     return (
-        <div className={`${styles.reviewCard} ${currentUser.id == user.id ? styles.cardColor : ''}`}>
+        <div className={`${styles.reviewCard} ${userDataStore.user.id == user.id ? styles.cardColor : ''}`}>
             <ReviewHeader props={{ user, review: review, img: '/user.png' }} />
             <div className={styles.reviewContent}>
                 <div className={`${styles.reviewText} ${showCover ? styles.withCover : null}`}>
@@ -28,15 +28,17 @@ export default function ReviewCard({ review, song, showCover }: ReviewCardProps)
                 </div>
                 {showCover ?
                     <Link to={`/songs/${song!.id}`} className={styles.song}>
-                    <SongCover small={true} cover={{ img: `/images/${song!.cover}`, rating: review.rating.rating, title: 'Рейтинг' }} />
-                    <span className={styles.songTitle}>
-                        {song!.title}
-                    </span>
-                </Link>
-                :
+                        <SongCover small={true} cover={{ img: `/images/${song!.cover}`, rating: review.rating, title: 'Рейтинг' }} />
+                        <span className={styles.songTitle}>
+                            {song!.title}
+                        </span>
+                    </Link>
+                    :
                     null
                 }
             </div>
         </div>
     )
-}
+})
+
+export default ReviewCard;

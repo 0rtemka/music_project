@@ -7,18 +7,16 @@ import Layout from './components/Layout'
 import AddContentPage from './pages/AddContentPage/AddContentPage'
 import ArtistPage from './pages/ArtistPage/ArtistPage'
 import SongPage from './pages/SongPage/SongPage'
-import { LoginForm } from './components/LoginForm/LoginForm'
-import { RegistrationPage } from './pages/RegistrationPage/RegistrationPage'
-import { useDispatch } from 'react-redux'
+import RegistrationPage from './pages/RegistrationPage/RegistrationPage'
 import { useEffect } from 'react'
-import { setAuth, setUser } from './store/reducers/userReducer'
 import axios from 'axios'
 import { API_URL } from './http'
 import { LoginPage } from './pages/LoginPage/LoginPage'
 import { FindPage } from './pages/FindPage/FindPage'
+import { observer } from 'mobx-react-lite'
+import { userDataStore } from './store/mobx/userDataStore'
 
-function App() {
-  const dispatch = useDispatch();
+const App = observer(() => {
 
   useEffect(() => {
     if (localStorage.getItem("token")) {
@@ -26,11 +24,11 @@ function App() {
           .get(`${API_URL}/refresh`, { withCredentials: true })
           .then((res) => {
             localStorage.setItem("token", res.data.access_token);
-            dispatch(setAuth(true));
-            dispatch(setUser(res.data.user));
+
+            userDataStore.setAuth(true);
+            userDataStore.setUser(res.data.user);
           });
     }
-      
   }, []);
 
   return (
@@ -51,6 +49,6 @@ function App() {
       </Routes>
     </>
   )
-}
+})
 
 export default App

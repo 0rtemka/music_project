@@ -4,15 +4,15 @@ import ProfileCard from "../../components/ProfileCard/ProfileCard";
 import ReviewCard from "../../components/ReviewCard/ReviewCard";
 import { useUserReviews } from '../../hooks/useUserReviews';
 import { useNavigate, useParams } from 'react-router-dom';
-import { useAppSelector } from '../../hooks/reduxHooks';
+import { userDataStore } from '../../store/mobx/userDataStore';
+import { observer } from 'mobx-react-lite';
 
-export default function ProfilePage() {
-    const { isAuth } = useAppSelector(state => state.user)
+const ProfilePage = observer(() => {
     const { userId } = useParams();
     const { user, reviews } = useUserReviews(userId);
     const navigate = useNavigate();
 
-    if (!userId && !isAuth) {
+    if (!userId && !userDataStore.isAuth) {
         navigate("/login")
     }
 
@@ -28,7 +28,8 @@ export default function ProfilePage() {
                 :
                 null
             }
-
         </div>
     )
-}
+})
+
+export default ProfilePage;

@@ -5,8 +5,10 @@ import { useEffect, useState } from "react";
 import { ArtistSearchCard } from "../ArtistSearchCard/ArtistSearchCard";
 import { Artist } from "../../models/models";
 import { AuthError } from "../AuthError/AuthError";
+import { observer } from "mobx-react-lite";
+import { updateArtistsStore } from "../../store/mobx/updateArtistsStore";
 
-export function AddArtistForm() {
+export const AddArtistForm = observer(() => {
     const [name, setName] = useState<string>("");
     const [cover, setCover] = useState<FileList | null>(null);
     const [miniCover, setMiniCover] = useState<FileList | null>(null);
@@ -28,6 +30,7 @@ export function AddArtistForm() {
         }).finally(() => {
             setCover(null);
             setMiniCover(null);
+            updateArtistsStore.switch();
         });
     }
 
@@ -97,4 +100,4 @@ export function AddArtistForm() {
             </div>
         </>
     )
-}
+})

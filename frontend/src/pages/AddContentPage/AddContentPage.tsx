@@ -1,12 +1,12 @@
+import { observer } from "mobx-react-lite";
 import { AddArtistForm } from "../../components/AddArtistForm/AddArtistForm";
 import { AddSongForm } from "../../components/AddSongForm/AddSongForm";
-import { useAppSelector } from "../../hooks/reduxHooks";
+import { userDataStore } from "../../store/mobx/userDataStore";
 import ErrorPage from "../NotFoundPage/NotFoundPage";
 
-export default function AddContentPage() {
-    const {user, isAuth} = useAppSelector(state => state.user);
-    
-    if (isAuth && user && user.roles.includes("ADMIN")) {
+const AddContentPage = observer(() => {
+
+    if (userDataStore.isAuth && userDataStore.user && userDataStore.user.roles.includes("ADMIN")) {
         return (
             <div style={{marginTop: "100px", display: "flex", flexDirection: "column", gap: "30px"}}>
                 <AddArtistForm />
@@ -18,4 +18,6 @@ export default function AddContentPage() {
     return (
         <ErrorPage />
     )
-}
+})
+
+export default AddContentPage;

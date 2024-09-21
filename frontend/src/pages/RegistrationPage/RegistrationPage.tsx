@@ -1,16 +1,18 @@
 import { useNavigate } from "react-router-dom";
 import { RegistrationForm } from "../../components/RegistrationForm/RegistrationForm";
-import { useAppSelector } from "../../hooks/reduxHooks";
+import { observer } from "mobx-react-lite";
+import { userDataStore } from "../../store/mobx/userDataStore";
 
-export function RegistrationPage() {
-    const { isAuth } = useAppSelector(state => state.user);
+const RegistrationPage = observer(() => {
     const navigate = useNavigate();
 
-    if (isAuth) {
+    if (userDataStore.isAuth) {
         navigate("/");
     }
 
     return (
         <RegistrationForm />
     )
-}
+})
+
+export default RegistrationPage;

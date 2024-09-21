@@ -2,14 +2,12 @@ import { useEffect, useState } from 'react';
 import styles from './RatingFormBody.module.css'
 import { Rating } from '../../models/models';
 import { api, API_URL } from '../../http';
-import { useDispatch } from 'react-redux';
-import { setReview } from '../../store/reducers/curUserReviewReducer';
 import { useParams } from 'react-router-dom';
+import { observer } from 'mobx-react-lite';
+import { curUserReviewStore } from '../../store/mobx/curUserReviewStore';
 
-
-export default function RatingFormBody() {
+const RatingFormBody = observer(() => {
     const { songId } = useParams()
-    const dispatch = useDispatch();
     const [rating, setRating] = useState("50");
     const [ratingItems, setRatingItems] = useState({ relevance: "5", structure: "5", realization: "5", lyrics: "5", beat: "5" });
     const [title, setTitle] = useState<string>("");
@@ -49,7 +47,7 @@ export default function RatingFormBody() {
                 beat: parseInt(ratingItems.beat),
             }
         }).then((res) => {
-            dispatch(setReview(res.data));
+            curUserReviewStore.setReview(res.data);
         })
     };
 
@@ -107,4 +105,6 @@ export default function RatingFormBody() {
             </form>
         </>
     )
-}
+})
+
+export default RatingFormBody;

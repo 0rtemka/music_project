@@ -1,17 +1,16 @@
 import { Link } from 'react-router-dom'
 import styles from './RegistrationForm.module.css'
 import { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { setAuth, setUser } from '../../store/reducers/userReducer';
 import AuthService from '../../services/AuthService';
 import { AuthError } from '../AuthError/AuthError';
+import { userDataStore } from '../../store/mobx/userDataStore';
+import { observer } from 'mobx-react-lite';
 
-export function RegistrationForm() {
+export const RegistrationForm = observer(() => {
     const [userLogin, setUserLogin] = useState<string>("");
     const [password, setPassword] = useState<string>("");
     const [passwordConfirm, setPasswordConfirm] = useState<string>("");
     const [errMessage, setErrorMessage] = useState<string>("");
-    const dispatch = useDispatch();
 
     const registerFunc = () => {
         if (password !== passwordConfirm) {
@@ -21,8 +20,8 @@ export function RegistrationForm() {
         AuthService.registration(userLogin, password)
             .then((res) => {
                 localStorage.setItem("token", res.data.access_token);
-                dispatch(setAuth(true));
-                dispatch(setUser(res.data.user));
+                userDataStore.setAuth(true);
+                userDataStore.setUser(res.data.user);
             })
             .catch((err) => {
                 setErrorMessage(err.response.data.message);
@@ -57,4 +56,4 @@ export function RegistrationForm() {
             </div>
         </div>
     )
-}
+})

@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { Artist, Song, User } from "../../models/models";
+import { Artist, Song } from "../../models/models";
 
 export const searchSlice = createSlice({
   name: "search",

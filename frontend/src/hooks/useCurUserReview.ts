@@ -1,16 +1,15 @@
 import { useEffect } from "react"
 import { api, API_URL } from "../http";
-import { useAppSelector } from "./reduxHooks";
-import { useDispatch } from "react-redux";
-import { setReview } from "../store/reducers/curUserReviewReducer";
+import { curUserReviewStore } from "../store/mobx/curUserReviewStore";
 
-export const useCurUserReview = (songId: string) => {    
-    const curUserReview = useAppSelector(state => state.curUserReview.review);
-    const dispatch = useDispatch();
+
+const useCurUserReview = (songId: string) => { 
     useEffect(() => {
         api.get(`${API_URL}/me/reviews/${songId}`).then((res) => {
-            dispatch(setReview(res.data));
+            curUserReviewStore.setReview(res.data);
         })
     }, [songId]);
-    return curUserReview;
+    return curUserReviewStore.review;
 }
+
+export default useCurUserReview;

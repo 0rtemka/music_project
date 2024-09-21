@@ -1,25 +1,24 @@
 import { Link, useNavigate } from "react-router-dom"
 import styles from "./LoginForm.module.css"
 import { useState } from "react"
-import { useDispatch } from "react-redux";
-import { setAuth, setUser } from "../../store/reducers/userReducer";
 import AuthService from "../../services/AuthService";
 import { AuthError } from "../AuthError/AuthError";
+import { observer } from "mobx-react-lite";
+import { userDataStore } from "../../store/mobx/userDataStore";
 
-export function LoginForm() {
+export const LoginForm = observer(() => {
     const [userLogin, setUserLogin] = useState<string>("");
     const [password, setPassword] = useState<string>("");
     const [errMessage, setErrMessage] = useState<string>("");
     const navigate = useNavigate();
-    const dispatch = useDispatch();
 
     const loginFunc = () => {
         setErrMessage("");
         AuthService.login(userLogin, password)
             .then((res) => {
                 localStorage.setItem("token", res.data.access_token);
-                dispatch(setAuth(true));
-                dispatch(setUser(res.data.user));
+                userDataStore.setAuth(true);
+                userDataStore.setUser(res.data.user);
                 navigate("/")
             }).catch((err) => {
                 setErrMessage(err.response.data.message);
@@ -54,4 +53,4 @@ export function LoginForm() {
             </div>
         </div>
     )
-}
+})

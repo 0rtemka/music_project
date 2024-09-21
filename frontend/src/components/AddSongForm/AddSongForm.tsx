@@ -3,8 +3,9 @@ import { useArtists } from "../../hooks/useArtists"
 import styles from "./AddSongForm.module.css"
 import { Artist } from "../../models/models";
 import { api, API_URL } from "../../http";
+import { observer } from "mobx-react-lite";
 
-export function AddSongForm() {
+export const AddSongForm = observer(() => {
     const artists = useArtists();
     const [selectedArtists, setSelectedArtists] = useState<Artist[]>([])
     const [artistInput, setArtistInput] = useState<string>("");
@@ -70,4 +71,4 @@ export function AddSongForm() {
             </form>
         </div>
     )
-}
+})

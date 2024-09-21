@@ -1,16 +1,17 @@
 import { useNavigate } from "react-router-dom";
 import { LoginForm } from "../../components/LoginForm/LoginForm";
-import { useAppSelector } from "../../hooks/reduxHooks";
+import { observer } from "mobx-react-lite";
+import { userDataStore } from "../../store/mobx/userDataStore";
 
-export function LoginPage() {
-    const { isAuth } = useAppSelector(state => state.user);
+export const LoginPage = observer(() => {
+    
     const navigate = useNavigate();    
 
-    if (isAuth) {
+    if (userDataStore.isAuth) {
         navigate("/");
     }
 
     return (
         <LoginForm></LoginForm>
     )
-}
+})
